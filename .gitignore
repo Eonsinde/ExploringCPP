@@ -1,0 +1,32 @@
+# Build output and CMake-generated files
+build/
+cmake-build-*/
+out/
+
+# Common C/C++ generated artifacts
+CMakeFiles/
+CMakeCache.txt
+CTestTestfile.cmake
+Makefile
+*.cmake
+*.obj
+*.o
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.exe
+
+# Compiler/linker output folders
+bin/
+lib/
+
+# IDE/editor files
+.vscode/
+.vs/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
