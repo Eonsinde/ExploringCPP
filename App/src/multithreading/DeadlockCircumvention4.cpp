@@ -86,8 +86,9 @@ public:
         // Perform transfer operation here
         bool transferResult = 0, nameUpdateResult = 0;
 
+        // TODO(DeadlockCircumvention4): Fix issue with TransferMoney not being visible to compiler 
         // This thread performs the transfer operation from user1 to 2
-        std::thread t1(TransferMoney, std::ref(user1), std::ref(user2), 10000, std::ref(transferResult));
+        //std::thread t1(TransferMoney, std::ref(user1), std::ref(user2), 10000, std::ref(transferResult));
 
         // This thread performs the name update to user2
         std::thread t2(
@@ -96,7 +97,7 @@ public:
             }
         );
 
-        t1.join();
+        //t1.join();
         t2.join();
 
         std::cout << "\n\n========== Operations Result ==========\n";
