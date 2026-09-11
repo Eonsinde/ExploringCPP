@@ -6,7 +6,7 @@
 #  nothing about App — dependency flows one way only.
 # ============================================================
 
-file(GLOB_RECURSE CORE_SOURCES
+file(GLOB_RECURSE CORE_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 
