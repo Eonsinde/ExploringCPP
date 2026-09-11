@@ -29,7 +29,7 @@ public:
 
 	// We compare the data here using copies since locking both instances of Y
 	// would rather be redundant since int copying is memory cheap
-	bool operator==(const Y& rhs) {
+	bool operator==(const Y& rhs) const {
 		if (this == &rhs)
 			return true;
 
@@ -88,4 +88,4 @@ public:
 	}
 };
 
-//DECLARE_MAIN(SmallGranularityExample)
+DECLARE_MAIN(SmallGranularityExample)
