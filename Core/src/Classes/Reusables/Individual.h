@@ -7,25 +7,43 @@
 
 
 namespace Core{
-    // A reusable class that mimics an Human with chromosome level details;
-    // most suitable for evolutionary algorithms
+    /// @brief A reusable class that mimics an Human with chromosome level details;
+    /// most suitable for evolutionary algorithms
     class Individual
     {
     public:
+        /// @brief Default constructor
+        /// @param xy Chromosomes for new individual
+        /// @param target The targeted chromosome - used to calculate individual's fitness
         Individual(const std::string& xy, const std::string& target);
 
-        // Create genome based on the target
+        /// @brief Creates the a genome based off a given target
+        /// @param target Item to reference when creating genome
+        /// @return New chromosome for an individual
         static std::string CreateGenome(const std::string& target);
 
-        // Creates a new Individual by mating
+        /// @brief Creates a new Individual by mating
+        /// @param rhs The second individual to be mated with
+        /// @return New Individual
         Individual Mate(const Individual& rhs);
 
-        // Getters
+        // ----------------------------- Getters -----------------------------
 
+        /// @brief Retrieves details about an Individual
+        /// @return Chromosome + Fitness 
         std::string GetDetails() const;
+
+        /// @brief Retrieves chromosome for Individual
+        /// @return Chromosome
         std::string GetChromosome() const;
+
+        /// @brief Retrieves fitness for Individual
+        /// @return Fitness
         int GetFitness() const;
-        const std::string& GetPossibleGenes();
+
+        /// @brief Retrieves the possible genes an Individual can be derived from
+        /// @return possible genes
+        static const std::string& GetPossibleGenes();
 
     protected:
         // Generated a random gene from the genes
