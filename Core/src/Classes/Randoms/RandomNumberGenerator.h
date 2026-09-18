@@ -17,6 +17,9 @@ namespace Core {
 
         // Returns integer within the given range - parameters inclusive
         int Generate(int min, int max) {
+            if (min >= max)
+                throw std::logic_error("RandomNumberGenerator: Min must be lesser than Max!");
+
             std::uniform_int_distribution<int> distrib(min, max);
 
             return distrib(_mGen);
