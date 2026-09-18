@@ -88,4 +88,4 @@ public:
 	}
 };
 
-DECLARE_MAIN(SmallGranularityExample)
+//DECLARE_MAIN(SmallGranularityExample)
