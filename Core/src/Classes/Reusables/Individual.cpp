@@ -18,6 +18,11 @@ namespace Core {
     }
 
     Individual Individual::Mate(const Individual& rhs) {
+        // Since we don't want to cache target internally, we enforce that
+        // mating only occurs between individuals with the same chromosome length
+        if (_mChromosome.size() != rhs._mChromosome.size())
+            throw std::logic_error("Parents must have the same chromosome length");
+
         std::string newChromosome;
         newChromosome.reserve((*_mTarget).size());
 
