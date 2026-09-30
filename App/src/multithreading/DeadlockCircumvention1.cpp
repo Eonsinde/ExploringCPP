@@ -52,7 +52,7 @@ class DeadlockCircumvention1 : public Core::Application
 {
 public:
 	virtual void Run() override {
-		
+		//Test2();
 	}
 
 	// FOCUS: Argument Dependent Lookup
@@ -72,7 +72,7 @@ public:
 		obj1.Print("Object_1");
 		obj2.Print("Object_2");
 
-		// Generic programming using ADL
+		// Using ADL
 		using std::swap;
 		swap(obj1, obj2);
 
