@@ -1,6 +1,6 @@
 #include "EntryPoint/Application.h"
 #include "Classes/Threads/ThreadSafeStack.h"
-#include "Utils/IPrintable.h"
+#include "Classes/Utils/IPrintable.h"
 
 #include <thread>
 #include <string>
