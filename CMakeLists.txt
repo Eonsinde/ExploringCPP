@@ -46,7 +46,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # ── Subdirectories ─────────────────────────────────────────
 # add_subdirectory tells CMake to go read that folder's CMakeLists.txt.
 # ORDER MATTERS: Vendor before Core as Core links to Vendor's content
-# add_subdirectory(Vendor)
+add_subdirectory(Vendor)
 add_subdirectory(Core)
 add_subdirectory(App)
 
