@@ -25,10 +25,10 @@ class GAApplication : Core::Application
 
 public:
 	virtual void Run() override {
-		int populationSizes[]{ 10, 20, 50, 100 };
+		int populationSizes[]{ 10, 20, 50, 100, 200 };
 
 		//GeneticAlgorithm(populationSizes[0], 10000, true);
-		ThreadSafeGeneticAlgorithm(populationSizes[2], 5000, true, true);
+		ThreadSafeGeneticAlgorithm(populationSizes[3], 5000, true, true);
 	}
 
 	std::shared_ptr<std::vector<int>> GeneticAlgorithm(
@@ -142,12 +142,11 @@ public:
 			if (verbose)
 				spdlog::info("========== Generation {} ==========", generation);
 
-
 			// Log the current population per generation
 			if (extraVerbose) {
 				try {
 					for (int i = 0; i < popSize; ++i) {
-						spdlog::info(population.at(i).GetDetails());
+						spdlog::info("{}) {}", i+1, population.at(i).GetDetails());
 					}
 				}
 				catch (std::exception& e) {
@@ -189,27 +188,33 @@ public:
 			size_t remainingPoolSize = popSize - elitismPoolSize;
 
 			// Get the needed thread number and block size
-			std::pair<size_t, size_t> processMetadata = Core::ProcessByBlocks(remainingPoolSize);
+			std::pair<size_t, size_t> processMetadata = Core::ProcessByBlocks(remainingPoolSize, 25);
 
 			std::vector<std::thread> threadsManager;
 			threadsManager.reserve(processMetadata.first - 1);
 
-			// Start filling up past the perserved elitism populace
+			// Start filling up past the preserved elitism populace
 			size_t startIndex = elitismPoolSize;
 
 			// Spawn the needed threads
 			for (int i = 0; i < processMetadata.first - 1; ++i) {
-				size_t endIndex = elitismPoolSize + processMetadata.second;
+				// TODO(GeneticAlgorithm): Trigger semantic error here using elitismPoolSize
+				size_t endIndex = startIndex + processMetadata.second;
 
 				threadsManager.emplace_back(
 					[=, &population, &newPopulation, &matePoolSize] () mutable {
+						// TODO(GeneticAlgorithm): Understand subsequent loops past the first run even with wrong semantics
 						for (; startIndex != endIndex; ++startIndex) {
+							std::unique_lock<std::mutex> ul(protectWriteMutex);
+							spdlog::info("[{}, {}]", startIndex, endIndex);
+							ul.unlock();
+
 							Core::Individual parent1 =
 								population.at(Core::RandomNumberGenerator::GetInstance().Generate(0, matePoolSize - 1));
 							Core::Individual parent2 =
 								population.at(Core::RandomNumberGenerator::GetInstance().Generate(0, matePoolSize - 1));
 
-							std::lock_guard<std::mutex> lg(protectWriteMutex);
+							ul.lock();
 							newPopulation.push_back(parent1.Mate(parent2));
 						}
 					}
