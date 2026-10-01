@@ -1,6 +1,8 @@
 #include "EntryPoint/Application.h"
 
-
+// This application implments naive and constant time approaches to
+// determining if a number (n), can be expressed as the sum of
+// consecutive positive integers
 class IsSumOfConsecutiveNumbersApp : public Core::Application
 {
 public:
@@ -28,7 +30,7 @@ public:
             for (int j = i; j < n; j++) {
                 sum += j;
 
-                // j > i: ensures the it was more that one number that attained the sum equal to n.
+                // j > i: ensures the it was more than one number that attained the sum equal to n.
                 // This way, sum will always be the addition of two or more consecutive numbers and not one.
                 // Peradventure, j == i, and sum = j, and sum = n, then it wasn't the sum of two or more 
                 // consecutive integers that helped reached n, it was just one number, hence, invalid
