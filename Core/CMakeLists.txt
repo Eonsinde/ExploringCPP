@@ -29,4 +29,5 @@ target_include_directories(Core PUBLIC
 # spdlog on its include/link path just by linking to Core
 target_link_libraries(Core PUBLIC
     spdlog::spdlog	#logging			(FetchContent target, note :: namespace)
+    Vendor
 )
