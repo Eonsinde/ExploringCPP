@@ -49,7 +49,7 @@ namespace Core{
         // Generated a random gene from the genes
         static char MutatedGenes(const std::string& genes);
 
-        // Get hamming distance: how much of instance's chromosomes don't match with target
+        // Get hamming distance: how much of the instance's chromosomes don't match with target
         int CalcFitness(const std::string& target);
 
     private:
