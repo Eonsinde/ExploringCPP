@@ -1,7 +1,12 @@
-// Enrtry point
-
+// Entry point
 #include <iostream>
 #include <spdlog/spdlog.h>
+
+#ifdef _WIN32
+    #define NOMINMAX
+    #define WIN32_LEAN_AND_MEAN   // optional but recommended
+    #include <Windows.h>
+#endif
 
 namespace Core {
     // Application: is the Root class which all application classes must inherit from.
