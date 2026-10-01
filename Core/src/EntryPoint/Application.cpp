@@ -5,6 +5,10 @@
 
 namespace Core {
     Application::Application() {
+        // Set output console to use UTF-8 encoding
+        SetConsoleOutputCP(CP_UTF8);
+        SetConsoleCP(CP_UTF8);
+
         if (_sAppInstance) {
             throw std::runtime_error("Application instance is already running!");
         }
